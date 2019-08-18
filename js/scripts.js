@@ -195,39 +195,41 @@ $(document).ready(() => {
     function loadActiveTasks() {
         // Get active tasks
         chrome.storage.local.get(['active_tasks'], (result) => {
-            activeTasks = result.active_tasks
+            activeTasks = result.active_tasks || []
 
-            $('.active-tasks-number').text(activeTasks.length)
-            $('#active-tasks-table tbody').html('')
-
-            if (activeTasks.length > 0) {
-                $.each(activeTasks, (index, value) => {
+            if (completedTasks) {
+                $('.active-tasks-number').text(activeTasks.length)
+                $('#active-tasks-table tbody').html('')
+    
+                if (activeTasks.length > 0) {
+                    $.each(activeTasks, (index, value) => {
+                        $('#active-tasks-table tbody').append(`
+                            <tr>
+                                <td title="Created on ${value.date_created}">
+                                    <h5>${value.task}</h5>
+                                    
+                                    <div class="task-meta">
+                                        <button class="btn btn-success btn-sm complete-task" data-task="${index}" title="Complete Task">
+                                            <i class="fa fa-check"></i> Complete Task
+                                        </button>
+    
+                                        <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="active" title="Delete Task">
+                                            <i class="fa fa-trash"></i> Delete Task
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `)
+                    })
+                } else {
                     $('#active-tasks-table tbody').append(`
                         <tr>
-                            <td title="Created on ${value.date_created}">
-                                <h5>${value.task}</h5>
-                                
-                                <div class="task-meta">
-                                    <button class="btn btn-success btn-sm complete-task" data-task="${index}" title="Complete Task">
-                                        <i class="fa fa-check"></i> Complete Task
-                                    </button>
-
-                                    <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="active" title="Delete Task">
-                                        <i class="fa fa-trash"></i> Delete Task
-                                    </button>
-                                </div>
+                            <td colspan="2" class="text-center">
+                                <h5>No active tasks available.</h5>
                             </td>
                         </tr>
                     `)
-                })
-            } else {
-                $('#active-tasks-table tbody').append(`
-                    <tr>
-                        <td colspan="2" class="text-center">
-                            <h5>No active tasks available.</h5>
-                        </td>
-                    </tr>
-                `)
+                }
             }
         })
     }
@@ -239,37 +241,39 @@ $(document).ready(() => {
         chrome.storage.local.get(['completed_tasks'], (result) => {
             completedTasks = result.completed_tasks
 
-            $('.completed-tasks-number').text(completedTasks.length)
-            $('#completed-tasks-table tbody').html('')
-
-            if (completedTasks.length > 0) {
-                $.each(completedTasks, (index, value) => {
+            if (completedTasks) {
+                $('.completed-tasks-number').text(completedTasks.length)
+                $('#completed-tasks-table tbody').html('')
+    
+                if (completedTasks.length > 0) {
+                    $.each(completedTasks, (index, value) => {
+                        $('#completed-tasks-table tbody').append(`
+                            <tr>
+                                <td title="Last updated on ${value.date_updated}">
+                                    <h5>${value.task}</h5>
+                                    
+                                    <div class="task-meta">
+                                        <button class="btn btn-info btn-sm restore-task" data-task="${index}" title="Restore Task">
+                                            <i class="fa fa-undo"></i> Restore Task
+                                        </button>
+    
+                                        <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="completed" title="Delete Task">
+                                            <i class="fa fa-trash"></i> Delete Task
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `)
+                    })
+                } else {
                     $('#completed-tasks-table tbody').append(`
                         <tr>
-                            <td title="Last updated on ${value.date_updated}">
-                                <h5>${value.task}</h5>
-                                
-                                <div class="task-meta">
-                                    <button class="btn btn-info btn-sm restore-task" data-task="${index}" title="Restore Task">
-                                        <i class="fa fa-undo"></i> Restore Task
-                                    </button>
-
-                                    <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="completed" title="Delete Task">
-                                        <i class="fa fa-trash"></i> Delete Task
-                                    </button>
-                                </div>
+                            <td colspan="2" class="text-center">
+                                <h5>No completed tasks available.</h5>
                             </td>
                         </tr>
                     `)
-                })
-            } else {
-                $('#completed-tasks-table tbody').append(`
-                    <tr>
-                        <td colspan="2" class="text-center">
-                            <h5>No completed tasks available.</h5>
-                        </td>
-                    </tr>
-                `)
+                }
             }
         })
     }
