@@ -12,8 +12,7 @@
 	</head>
 
 	<body>
-		<div id="tasks-feedback"></div>
-
+		<!-- Form for creating tasks-->
 		<form id="tasks-form">
 			<h3>What needs to be done?</h2>
 
@@ -21,7 +20,14 @@
 			<span class="form-text">PRESS  <strong> [ENTER] </strong>  TO SUBMIT THE FORM.</span>
 		</form>
 
+
+		<!-- Feedback alert -->
+		<div id="tasks-feedback"></div>
+
+
+		<!-- Tasks -->
 		<div id="tasks">
+			<!-- Tab titles -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li class="nav-item">
 					<a class="nav-link active" id="active-tasks-tab" data-toggle="tab" href="#active-tasks" role="tab">
@@ -36,6 +42,7 @@
 				</li>
 			</ul>
 
+			<!-- Tab content -->
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="active-tasks" role="tabpanel">
 					<table class="table table-striped" id="active-tasks-table">
@@ -61,12 +68,12 @@
 					</table>
 				</div>
 			</div>
+		</div>
 
-			<div class="text-center mt-4">
-				<button id="delete-tasks" class="btn btn-danger">
-					<i class="fa fa-trash"></i> DELETE ALL TASKS
-				</button>
-			</div>
+		<div class="text-center my-4">
+			<button id="delete-tasks" class="btn btn-danger btn-sm">
+				<i class="fa fa-trash"></i> DELETE ALL TASKS
+			</button>
 		</div>
 
 		<script src="../js/jquery-3.4.1.min.js"></script>

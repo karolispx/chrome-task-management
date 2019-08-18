@@ -76,8 +76,8 @@ $(document).ready(() => {
     })
 
 
-    // Activate task
-    $(document).on('click', '.activate-task', (button) => {
+    // Restore task
+    $(document).on('click', '.restore-task', (button) => {
         if (button && button.currentTarget) {
             let buttonObject = button.currentTarget
 
@@ -95,7 +95,7 @@ $(document).ready(() => {
                     completedTasks.splice(taskId, 1)
     
                     // Display message
-                    displayMessage('Task has been activated successfully!', 'success')
+                    displayMessage('Task has been restored successfully!', 'success')
 
                     // Save and reload tasks
                     saveAndReloadTasks()
@@ -117,23 +117,39 @@ $(document).ready(() => {
                 let buttonObject = button.currentTarget
     
                 if (buttonObject) {
-                    let taskId = $(buttonObject).data('task')
-    
-                    // Get the task from 'completed tasks' list and remote it
-                    let task = completedTasks[taskId]
-    
-                    if (task) {
-                        // Remove this task from 'completed tasks' list
-                        completedTasks.splice(taskId, 1)
-        
-                        // Display message
-                        displayMessage('Task has been deleted successfully!', 'success')
-                      
-                        // Save and reload tasks
-                        saveAndReloadTasks()
+                    // Get the task from appropriate tasks' list and remote it
+                    let list = $(buttonObject).data('list')
+
+                    if (list && (list === 'active' || list === 'completed')) {
+                        let task
+                        let taskId = $(buttonObject).data('task')
+
+                        if (list === 'active') {
+                            task = activeTasks[taskId]
+                        } else {
+                            task = completedTasks[taskId]
+                        }
+
+                        if (task) {
+                            // Remove this task from appropriate tasks' list
+                            if (list === 'active') {
+                                activeTasks.splice(taskId, 1)
+                            } else {
+                                completedTasks.splice(taskId, 1)
+                            }
+                            
+                            // Display message
+                            displayMessage('Task has been deleted successfully!', 'success')
+                            
+                            // Save and reload tasks
+                            saveAndReloadTasks()
+                        } else {
+                            // Display message
+                            displayMessage('This task does not exist!', 'danger')
+                        }
                     } else {
                         // Display message
-                        displayMessage('This task does not exist!', 'danger')
+                        displayMessage('This task list does not exist!', 'danger')
                     }
                 }
             }
@@ -188,18 +204,18 @@ $(document).ready(() => {
                 $.each(activeTasks, (index, value) => {
                     $('#active-tasks-table tbody').append(`
                         <tr>
-                            <td>
+                            <td title="Created on ${value.date_created}">
                                 <h5>${value.task}</h5>
                                 
-                                <small>
-                                    <strong>Date created:</strong> ${value.date_created}
-                                </small>
-                            </td>
+                                <div class="task-meta">
+                                    <button class="btn btn-success btn-sm complete-task" data-task="${index}" title="Complete Task">
+                                        <i class="fa fa-check"></i> Complete Task
+                                    </button>
 
-                            <td class="text-right">
-                                <button class="btn btn-info complete-task" data-task="${index}" title="Move to COMPLETED tasks">
-                                    <i class="fa fa-check"></i>
-                                </button>
+                                    <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="active" title="Delete Task">
+                                        <i class="fa fa-trash"></i> Delete Task
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     `)
@@ -230,30 +246,23 @@ $(document).ready(() => {
                 $.each(completedTasks, (index, value) => {
                     $('#completed-tasks-table tbody').append(`
                         <tr>
-                            <td>
+                            <td title="Last updated on ${value.date_updated}">
                                 <h5>${value.task}</h5>
                                 
-                                <small>
-                                    <strong>Date completed:</strong> ${value.date_updated}
-                                </small>
-                            </td>
+                                <div class="task-meta">
+                                    <button class="btn btn-info btn-sm restore-task" data-task="${index}" title="Restore Task">
+                                        <i class="fa fa-undo"></i> Restore Task
+                                    </button>
 
-                            <td class="text-right">
-                                <div class="btn-group" role="group">
-                                    <button class="btn btn-info activate-task" data-task="${index}" title="Move back to ACTIVE tasks">
-                                        <i class="fa fa-undo"></i>
-                                    </button><br />
-
-                                    <button class="btn btn-danger delete-task" data-task="${index}" title="Delete">
-                                        <i class="fa fa-trash"></i>
+                                    <button class="btn btn-danger btn-sm delete-task" data-task="${index}" data-list="completed" title="Delete Task">
+                                        <i class="fa fa-trash"></i> Delete Task
                                     </button>
                                 </div>
                             </td>
-
                         </tr>
                     `)
                 })
-            } else {    
+            } else {
                 $('#completed-tasks-table tbody').append(`
                     <tr>
                         <td colspan="2" class="text-center">
@@ -269,16 +278,14 @@ $(document).ready(() => {
     // Display message
     function displayMessage(message, status) {
        if (message && status) {
-           let alert = `
+           $('#tasks-feedback').html(`
                 <div class="tasks-feedback-alert alert alert-${status} fade show text-center" role="alert">
                     ${message}
                 </div>
-           `
-
-           $('#tasks-feedback').html(alert)
+            `)
 
             $('.tasks-feedback-alert').delay(2000).slideUp(200, (item) => {
-                $(item).alert('close')
+                // $(item).alert('close')
             })
        }
     }

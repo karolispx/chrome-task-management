@@ -1,16 +1,18 @@
 body {
-    border: 1px solid #4172ca;
+    border: 1px solid #1b315a;
+    background: #ffffff;
 }
 
 #tasks-form {
-    display: inline-block;
+    margin-bottom: 20px;
+    display: block;
     width: 100%;
     text-align: center;
-    background: #1b315a;
-    padding: 20px;
+    background: #465a82;
+    padding: 15px;
     color: white;
-    border-top: 3px solid #4172ca;
-    border-bottom: 1px solid #4172ca;
+    border-top: 2px solid #1b315a;
+    border-bottom: 3px solid #1b315a;
 }
 
 #tasks-form h3, #tasks-form span.form-text {
@@ -21,13 +23,21 @@ body {
 #tasks-form input {
     max-width: 80%;
     margin: auto;
+    color: #1b315a;
 }
+
+#tasks-form .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(27, 49, 90, 0.2);
+    border-color: #1b315a;
+}
+
+
 
 
 #tasks {
     display: inline-block;
     width: 100%;
-    padding: 30px 20px;
+    padding: 20px 20px;
 }
 
 #tasks .nav-tabs li {
@@ -38,65 +48,114 @@ body {
 }
 
 #tasks .nav-tabs li .nav-link {
-    border: 1px solid #ebf3ff;
+    border: 1px solid #1b315a;
     border-top: 3px solid transparent;
-    background-color: #465a82;
+    background-color: #6a7da2;
     color: #d2d9e8;
 }
 
 #tasks .nav-tabs li .nav-link:hover {
     color: white;
-    background-color: #1b315a;
+    background-color: #586c94;
 }
 
 #tasks .nav-tabs li .nav-link.active {
-    border-top-color: #4172ca;
-    background-color: #1b315a;
+    background-color: #465a82;
     color: white;
+    border: 1px solid #1b315a;
+    border-top: 3px solid #1b315a;
 }
 
 #tasks .tab-content {
-    border: 1px solid #dee2e6;
+    border: 1px solid #adbad4;
     border-top: 0;
 }
 
 
 #tasks .tab-content table {
+    color: #1b315a;
     margin-bottom: 0;
 }
 
 
+#tasks .tab-content table tr {
+    background-color: #dfe5f5;
+}
+
 #tasks .tab-content table tr:nth-of-type(odd) {
-    background-color: #ebf3ff;
-}
-
-#tasks .tab-content table .btn-info {
-    background-color: #4172ca;
-    border-color: #4172ca;
-}
-
-#tasks .tab-content table .btn-info:hover, #tasks .tab-content table .btn-info:active {
-    background-color: #1b315a;
-    border-color: #1b315a;
-}
-
-#tasks .tab-content table .btn-info:focus {
-    box-shadow: none;
+    background-color: #eef2fb;
 }
 
 #tasks .tab-content table td {
-    padding: 10px;
+    padding: 20px 10px;
+}
+
+#tasks .tab-content table td, #tasks .tab-content table th {
+    border-top: 1px solid #adbad4;
 }
 
 #tasks .tab-content table h5 {
     margin-bottom: 0;
 }
 
+#tasks .tab-content table .task-meta {
+    margin-top: 10px;
+    padding-top: 10px;
+    display: block;
+    color: #737e94;
+    border-top: 1px solid #d6dce8;
+}
+
+#tasks .tab-content table span.task-meta i {
+    font-size: 12px;
+}
+
+#tasks .delete-task, #tasks .complete-task, #tasks .restore-task {
+    margin-right: 5px;
+    line-height: 1;
+}
+
+#tasks .restore-task {
+    background-color: #6a7da2;
+    border-color: #465a82;
+}
+
+#tasks .restore-task:hover {
+    background-color: #586c94;
+    border-color: #465a82;
+}
+
+
+
 #tasks-feedback {
-    opacity: 0.95;
     font-weight: bold;
-    width: 60%;
     position: fixed;
-    top: 15px;
-    left: 20%;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    font-size: 20px;
+}
+
+#tasks-feedback .tasks-feedback-alert {
+    border-radius: 0;
+    padding: 10px;
+}
+
+
+#tasks-feedback .tasks-feedback-alert.alert-success {
+    background: rgba(120, 171, 132, 0.95);
+    border-color: #0a4617;
+    color: #0a4617;
+}
+
+#tasks-feedback .tasks-feedback-alert.alert-warning {
+    background: rgba(218, 179, 121, 0.95);
+    border-color: #462f0f;
+    color: #503d21;
+}
+
+#tasks-feedback .tasks-feedback-alert.alert-danger {
+    background: rgba(197, 109, 118, 0.95);
+    border-color: #652b30;
+    color: #691a22;
 }
