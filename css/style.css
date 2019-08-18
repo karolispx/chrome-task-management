@@ -1,0 +1,102 @@
+body {
+    border: 1px solid #4172ca;
+}
+
+#tasks-form {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: #1b315a;
+    padding: 20px;
+    color: white;
+    border-top: 3px solid #4172ca;
+    border-bottom: 1px solid #4172ca;
+}
+
+#tasks-form h3, #tasks-form span.form-text {
+    color: #d2d9e8;
+    text-transform: uppercase;
+}
+
+#tasks-form input {
+    max-width: 80%;
+    margin: auto;
+}
+
+
+#tasks {
+    display: inline-block;
+    width: 100%;
+    padding: 30px 20px;
+}
+
+#tasks .nav-tabs li {
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    width: 50%;
+}
+
+#tasks .nav-tabs li .nav-link {
+    border: 1px solid #ebf3ff;
+    border-top: 3px solid transparent;
+    background-color: #465a82;
+    color: #d2d9e8;
+}
+
+#tasks .nav-tabs li .nav-link:hover {
+    color: white;
+    background-color: #1b315a;
+}
+
+#tasks .nav-tabs li .nav-link.active {
+    border-top-color: #4172ca;
+    background-color: #1b315a;
+    color: white;
+}
+
+#tasks .tab-content {
+    border: 1px solid #dee2e6;
+    border-top: 0;
+}
+
+
+#tasks .tab-content table {
+    margin-bottom: 0;
+}
+
+
+#tasks .tab-content table tr:nth-of-type(odd) {
+    background-color: #ebf3ff;
+}
+
+#tasks .tab-content table .btn-info {
+    background-color: #4172ca;
+    border-color: #4172ca;
+}
+
+#tasks .tab-content table .btn-info:hover, #tasks .tab-content table .btn-info:active {
+    background-color: #1b315a;
+    border-color: #1b315a;
+}
+
+#tasks .tab-content table .btn-info:focus {
+    box-shadow: none;
+}
+
+#tasks .tab-content table td {
+    padding: 10px;
+}
+
+#tasks .tab-content table h5 {
+    margin-bottom: 0;
+}
+
+#tasks-feedback {
+    opacity: 0.95;
+    font-weight: bold;
+    width: 60%;
+    position: fixed;
+    top: 15px;
+    left: 20%;
+}

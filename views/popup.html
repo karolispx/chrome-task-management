@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" style="min-width: 700px; max-width: 750px;">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Simple Task Management</title>
+
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/font-awesome.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div id="tasks-feedback"></div>
+
+		<form id="tasks-form">
+			<h3>What needs to be done?</h2>
+
+			<input minlength="5" maxlength="100" type="text" class="form-control" id="task-input" placeholder="i.e. take out the trash" required>
+			<span class="form-text">PRESS  <strong> [ENTER] </strong>  TO SUBMIT THE FORM.</span>
+		</form>
+
+		<div id="tasks">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="active-tasks-tab" data-toggle="tab" href="#active-tasks" role="tab">
+						Active Tasks (<span class="active-tasks-number">0</span>)
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" id="completed-tasks-tab" data-toggle="tab" href="#completed-tasks" role="tab">
+						Completed Tasks (<span class="completed-tasks-number">0</span>)
+					</a>
+				</li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="active-tasks" role="tabpanel">
+					<table class="table table-striped" id="active-tasks-table">
+						<tbody>
+							<tr>
+								<td colspan="2" class="text-center">
+									<h5>No active tasks available.</h5>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="tab-pane fade" id="completed-tasks" role="tabpanel">
+					<table class="table table-striped" id="completed-tasks-table">
+						<tbody>
+							<tr>
+								<td colspan="2" class="text-center">
+									<h5>No completed tasks available.</h5>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="text-center mt-4">
+				<button id="delete-tasks" class="btn btn-danger">
+					<i class="fa fa-trash"></i> DELETE ALL TASKS
+				</button>
+			</div>
+		</div>
+
+		<script src="../js/jquery-3.4.1.min.js"></script>
+		<script src="../js/bootstrap.bundle.min.js"></script>
+		<script src="../js/scripts.js"></script>
+	</body>
+</html>
